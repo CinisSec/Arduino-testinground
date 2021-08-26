@@ -45,7 +45,7 @@ void loop()
     int brightness;
     brightness = map(degrees, 0, FULL_ANGLE, 0, 255);
     lcd.setRGB(brightness,brightness,brightness);
-    if(temp > tempchange + 0.3 or temp < tempchange - 0.3) 
+    if(temp > tempchange + 0.5 or temp < tempchange - 0.5) 
     {
       tempchange = temp;
       Serial.println(a);
