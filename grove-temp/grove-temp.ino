@@ -37,8 +37,6 @@ void loop()
     float temp = 1.0/(log(R/R0)/B+1/298.15)-273.15;
     temp = temp - 1.35;
 
-
-    
     float voltage;
     int sensor_value = analogRead(ROTARY_ANGLE_SENSOR);
     voltage = (float)sensor_value*ADC_REF/1023;
