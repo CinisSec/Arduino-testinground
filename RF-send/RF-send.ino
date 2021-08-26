@@ -5,6 +5,7 @@ rgb_lcd lcd;
  
 const int RF_TX_PIN = 2;
 
+const int colorR = 255;
 const int colorG = 0;
 const int colorB = 255;
  
