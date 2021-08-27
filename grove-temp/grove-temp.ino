@@ -2,16 +2,13 @@
 #include "rgb_lcd.h"
 
 #define ROTARY_ANGLE_SENSOR A1
-#define ADC_REF 5   //reference voltage of ADC is 5v.If the Vcc switch on the seeeduino
-                    //board switches to 3V3, the ADC_REF should be 3.3
-#define GROVE_VCC 5 //VCC of the grove interface is normally 5v
-#define FULL_ANGLE 300 //full value of the rotary angle is 300 degrees
+#define ADC_REF 5
+#define GROVE_VCC 5
+#define FULL_ANGLE 300
 
 rgb_lcd lcd;
 
-int colorR = 10;
-int colorG = 10;
-int colorB = 10;
+int backlight = 10;
 
 int tempchange = 0;
 
@@ -22,14 +19,13 @@ const int pinTempSensor = A0;     // Grove - Temperature Sensor connect to A0
 void setup()
 {
     lcd.begin(16, 2);
-    lcd.setRGB(colorR, colorG, colorB);
+    lcd.setRGB(backlight, backlight, backlight);
     pinMode(ROTARY_ANGLE_SENSOR, INPUT);
     Serial.begin(9600);
 }
 
 void loop()
 {
-    
     int a = analogRead(pinTempSensor);
     
     float R = 1023.0/a-1.0;
@@ -42,19 +38,16 @@ void loop()
     voltage = (float)sensor_value*ADC_REF/1023;
     float degrees = (voltage*FULL_ANGLE)/GROVE_VCC;
 
-    int brightness;
-    brightness = map(degrees, 0, FULL_ANGLE, 0, 255);
-    lcd.setRGB(brightness,brightness,brightness);
-    if(temp > tempchange + 0.5 or temp < tempchange - 0.5) 
-    {
+    backlight = map(degrees, 0, FULL_ANGLE, 0, 255);
+    lcd.setRGB(backlight,backlight,backlight);
+      if(temp > tempchange + 0.5 or temp < tempchange - 0.5){
       tempchange = temp;
-      Serial.println(a);
-      Serial.println(tempchange);
+      lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Temperature:");
       lcd.setCursor(0, 1);
       lcd.print(temp, 1);
       delay(100);
-    }
+      }
     
 }
