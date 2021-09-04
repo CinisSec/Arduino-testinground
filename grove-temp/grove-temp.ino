@@ -78,7 +78,7 @@ void loop()
 }
 
 void tempcolor(float temp,int backlight){
-  if(temp >= 24){
+  if(temp > 25){
       lcd.setRGB(backlight,0,0);
     }else if(temp <= 18){
       lcd.setRGB(0,0,backlight);
